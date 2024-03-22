@@ -29,9 +29,9 @@
 
       <div class="area" id="userInput">
         <h2>User Input</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" id="answerForm">
           <label for="answer">Your Answer:</label>
-          <input type="text" id="answer" name="answer" />
+          <input type="text" id="input" name="answer" />
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -91,12 +91,12 @@
 
         input.scrollIntoView(); // Ensure input elt is visible
       });
-      
+
       // Post the user's messages to the server using fetch
       input.addEventListener("change", () => {
         // When the user strikes return
         let requestBody = JSON.stringify({name: nick, answer: input.value,})
-        fetch("/chat", {
+        fetch("/quiz", {
           // Start an HTTP request to this url.
           method: "POST", // Make it a POST request with body
           body: requestBody, // set to the user's nick and input.
@@ -104,6 +104,12 @@
         input.value = ""; // Clear the input
       });
 
+    </script>
+    <script>
+      // Add an event listener to the form submission event
+      document.getElementById("answerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+      });
     </script>
   </body>
 </html>
